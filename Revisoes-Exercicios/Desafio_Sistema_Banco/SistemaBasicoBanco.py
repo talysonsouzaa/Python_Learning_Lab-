@@ -34,10 +34,22 @@ def sacar(*, saldo, valor, extrato, limite, numero_saques):
                 saldo -= valor
                 extrato += f"Saque: R$ {valor:.2f}\n"
                 numero_saques += 1
-                return saldo, extrato, numero_saques
             
             else:
                 print("Operação falhou! O valor informado é inválido.")
+
+            return saldo, extrato, numero_saques
+
+def depositar(saldo, extrato, valor, /):
+            if valor > 0:
+                saldo += valor
+                extrato += f"Depósito: R$ {valor:.2f}\n"
+                print(f"Deposito de R$ {valor:.2f} realizado com sucesso")
+
+            else:
+                print("Operação falhou! O valor informado é inválido.")
+
+            return saldo, extrato
            
 
 while True:
@@ -46,18 +58,21 @@ while True:
 
     if opcao == "d":
         valor = float(input("Informe o valor do depósito: "))
-
-        if valor > 0:
-            saldo += valor
-            extrato += f"Depósito: R$ {valor:.2f}\n"
-
-        else:
-            print("Operação falhou! O valor informado é inválido.")
+        saldo, extrato = depositar(
+             saldo, extrato, valor
+        )
+        
 
     elif opcao == "s":
         valor = float(input("Informe o valor do saque: "))
-        sacar(saldo=saldo, valor=valor, extrato=extrato, limite=limite, numero_saques=numero_saques)
-
+        saldo, extrato, numero_saques = sacar(
+             saldo=saldo, 
+             valor=valor, 
+             extrato=extrato, 
+             limite=limite, 
+             numero_saques=numero_saques
+        )
+        
             
 
     elif opcao == "e":
