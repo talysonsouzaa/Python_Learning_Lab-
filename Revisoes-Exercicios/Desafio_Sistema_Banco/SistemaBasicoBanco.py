@@ -50,7 +50,13 @@ def depositar(saldo, extrato, valor, /):
                 print("Operação falhou! O valor informado é inválido.")
 
             return saldo, extrato
-           
+
+def exibir_extratos(saldo, /, *, extrato, ):
+            print("\n================ EXTRATO ================")
+            print("Não foram realizadas movimentações." if not extrato else extrato)
+            print(f"\nSaldo: R$ {saldo:.2f}")
+            print("==========================================")
+
 
 while True:
 
@@ -61,6 +67,7 @@ while True:
         saldo, extrato = depositar(
              saldo, extrato, valor
         )
+        
         
 
     elif opcao == "s":
@@ -76,10 +83,7 @@ while True:
             
 
     elif opcao == "e":
-        print("\n================ EXTRATO ================")
-        print("Não foram realizadas movimentações." if not extrato else extrato)
-        print(f"\nSaldo: R$ {saldo:.2f}")
-        print("==========================================")
+        exibir_extratos(saldo, extrato=extrato)
 
     elif opcao == "q":
         break
